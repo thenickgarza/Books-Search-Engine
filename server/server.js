@@ -6,6 +6,7 @@ const routes = require('./routes');
 const { ApolloServer } = require('apollo-server-express');
 // Adds the middleware t
 const { authMiddleware } = require('./utils/auth');
+const { typeDefs, resolvers } = require('./schemas');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build/index.html')));
 }
 
-app.use(routes);
+// app.use(routes);
 
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
